@@ -1,0 +1,72 @@
+#include<stdio.h>
+void main()
+{
+int p[20],c[20],ch,n,item,itemc,i;
+int top=-1,topc=-1;
+printf("PRODUCER CONSUMER PROBLEM\n");
+printf("enter the size\n");
+scanf("%d",&n);
+do
+{
+printf("menu\n");
+printf("1:produce\n2:consume\n3:exit\n");
+printf("enter the choice\n");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:
+{
+
+    if(top<n-1)
+     {
+       {
+       printf("enter the item\n");
+       scanf("%d",&item);
+       top++;
+       p[top]=item;
+       }
+       printf("producer produce\n");
+       for(i=top;i>=0;i--)
+       {
+       printf("%d\n",p[i]);
+       }
+     }
+    else
+    {
+    printf("producer is full\n");
+    }
+    }
+    
+    
+break;
+case 2:
+    if(top==-1)
+    {
+    printf("producer is empty\n");
+    }
+    else
+    {
+       if(topc<n-1)
+       {
+       itemc=p[top];
+       topc++;
+       c[topc]=itemc;
+       top--;
+       }
+       else
+       {
+       printf("consumer is full\n");
+       }
+       printf("consumer consume\n");
+       for(i=topc;i>=0;i--)
+       {
+       printf("%d\n",c[i]);
+       }
+     }
+     break;
+   }  
+  }while(ch<3);
+    
+ }
+ 
+
