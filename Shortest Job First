@@ -1,0 +1,156 @@
+
+#include<stdio.h>
+
+struct process
+{
+
+int wt,bt,tat,ct,at,pid;
+}p[50],temp;
+
+void shortest(struct process p[],int n)
+{
+int i,j;
+for(i=0;i<n;i++)
+{
+for(j=i;j<n-1;j++)
+{
+if(p[i].bt>p[j+1].bt)
+{
+temp=p[i];
+p[i]=p[j+1];
+p[j+1]=temp;
+}
+
+}
+}
+}
+
+void main()
+{
+
+int n,i,j,a,b,tot_tat,tot_wt,k;
+float avg_tat,avg_wt;
+
+i=0;
+printf("enter the number of processes:");
+scanf("%d",&n);
+
+while(i<n)
+{
+printf("\nenter AT and BT of process%d:",i);
+scanf("%d %d",&p[i].at,&p[i].bt);
+p[i].pid=i;
+i++;
+}
+
+for(i=0;i<n;i++)
+{
+for(j=i;j<n-1;j++)
+{
+if(p[i].at>p[j+1].at)
+{
+temp=p[i];
+p[i]=p[j+1];
+p[j+1]=temp;
+}
+
+}
+}
+i=0;
+printf("AT BT \n");
+while(i<n)
+{
+printf("%d  %d  \n",p[i].at,p[i].bt);
+i++;
+}
+
+
+p[0].ct=p[0].bt+p[0].at;
+p[0].tat=p[0].ct-p[0].at;
+p[0].wt=p[0].tat-p[0].bt;
+
+for(i=1;i<n;i++)
+{
+       a=0;
+	for(j=i;j<n;j++)
+	{
+		if(p[i-1].ct>=p[j].at)
+		{
+			a++;
+		}
+		else
+		break;
+	}
+	shortest(&p[i],a);
+	if(p[i-1].ct>p[i].at)
+	       p[i].ct=p[i-1].ct+p[i].bt;
+	else
+	       p[i].ct=p[i].at+p[i].bt;
+
+	p[i].tat=p[i].ct-p[i].at;
+	p[i].wt=p[i].tat-p[i].bt;
+}
+
+i=0;
+printf("Process\tAT\tBT\tCT\tTAT\tWT\n");
+while(i<n)
+{
+
+printf("P%d\t%d\t%d\t%d\t%d\t%d\n",p[i].pid,p[i].at,p[i].bt,p[i].ct,p[i].tat,p[i].wt);
+i++;
+}
+
+i=0;
+tot_tat=0;
+tot_wt=0;
+while(i<n)
+{
+tot_tat+=tot_tat+p[i].tat;
+tot_wt+=tot_wt+p[i].wt;
+i++;
+}
+
+avg_tat=tot_tat/n;
+avg_wt=tot_wt/n;
+
+printf("\nAverage Turn around time=%f",avg_tat);
+printf("\nAverage Waiting time=%f\n\n",avg_wt);
+printf("Gantt chart\n***********\n\n");
+
+
+printf("\n\t");
+i=0;
+
+for(k=0;k<(p[n-1].ct+(n*3)+1);k++)
+{
+printf("-");
+}
+printf("\n\t");
+while(i<n)
+{
+printf("|");
+printf("P%d",p[i].pid);
+for(j=0;j<p[i].bt;j++)
+printf(" ");
+i++;
+}
+printf("|\n\t");
+
+for(k=0;k<(p[n-1].ct+(n*3)+1);k++)
+{
+printf("-");
+}
+printf("\n\t");
+
+printf("%d",p[0].at);
+i=1;
+while(i<=n)
+{
+for(j=0;j<p[i-1].bt;j++)
+printf(" ");
+printf("  %d",p[i-1].ct);
+i++;
+}
+printf("\n\n");
+}
+
