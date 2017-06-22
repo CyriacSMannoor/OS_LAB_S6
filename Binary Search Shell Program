@@ -1,0 +1,45 @@
+echo "Enter the limit"
+read n
+echo "Enter the elements into the array"
+for( ( i=0 ; i<n ; i++ ) )
+do
+  for( ( j=$((i+1)) ; j<n ; j++ ) )
+do
+    if [ ${a[$i]} -gt ${a[$j]}]
+	then
+		temp=${a[$i]}
+		a[$i]=${a[$j]}
+		a[$j]=$temp
+    fi
+done
+done
+echo "Sorted Array"
+for((i=0;i<n;i++))
+do
+	echo "${a[$i]}"
+done
+echo "Enter the elements to search"
+read s 
+low=0
+#high=$((n-1))
+let "high=n-1"
+while((low<=high))
+do
+	let "mid=(low+high)/2"
+	if [ $s -eq ${a[$mid]} ]
+	then
+		flag=1
+	break
+	elif [ $s -lt ${a[$mid]} ]
+	then
+		high=$((mid-1))
+	else
+		low=$((mid+1))
+	fi
+done
+if [ $flag -eq 1 ]
+then 
+	echo "Element found at position $((mid+1))"
+else
+	echo "Element not found"
+fi
