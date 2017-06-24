@@ -1,0 +1,15 @@
+echo "Enter the number :"
+read n
+temp=$n
+while(($temp!=0))
+do
+   rem=$(temp%10)
+   rev=$((rev*10+rem))
+   temp=$((temp/10))
+done
+if((rev==n))
+then
+  echo "It is Palliandrome"
+else
+   else "It is not Palliandrome"
+fi
