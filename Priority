@@ -1,0 +1,107 @@
+
+#include<stdio.h>
+struct process
+   {
+         int pid;
+         int bt,wt,tt,pr;
+  
+   } p[10];
+struct process p1;
+     void main()
+        {
+             int i,j,n,tw=0,tat=0;
+             float aw=0,at=0;
+             printf("\n enter the no of process: ");
+             scanf("%d",&n);
+             for(i=0;i<n;i++)
+             {
+                 printf("\n enter the process id: ");
+                 scanf("%d",&p[i].pid);
+                 printf("\n enter the burst time of process p%d :",p[i].pid);
+                 scanf("%d",&p[i].bt);
+                 printf("enter the priority p%d :",p[i].pid);
+                 scanf("%d",&p[i].pr);
+                 
+                
+                 
+            }
+              for(i=0;i<n-1;i++)
+              {
+                  for(j=(i+1);j<n;j++)
+                   {
+
+                  if(p[i].pr>p[j].pr)
+             {
+                  p1=p[j];
+                  p[j]=p[i];
+                  p[i]=p1;
+             }
+             }
+             }
+               p[0].wt=0;
+               p[0].tt=p[0].bt;
+                           for(i=1;i<n;i++)
+                                {
+                                   p[i].wt=p[i-1].tt;
+                                  p[i].tt=p[i].bt+p[i].wt;
+                                }
+               for(i=0;i<n;i++)
+                      {
+                        tw=tw+p[i].wt;
+                        tat=tat+p[i].tt;
+                      }
+          aw=(float)tw/n;
+          at=(float)tat/n;
+          printf("\n processid \tburst time \twaiting time \tturn around time \tpriority");
+          for(i=0;i<n;i++) 
+                          {
+                 printf("\np%d\t\t%d\t\t %d\t\t%d\t\t\t\t\t%d",p[i].pid,p[i].bt,p[i].wt,p[i].tt,p[i].pr);
+                          }
+            printf("\n gantt chart \n");
+             for(i=0;i<n;i++)
+                        {
+             for(j=0;j<p[i].bt;j++)
+                             {
+                 printf("_");
+                             }
+                 printf("--");
+                     }
+                 printf("\n|");
+             for(i=0;i<n;i++)
+                    {
+             for(j=0;j<(p[i].bt/2);j++)
+                      {
+             printf(" ");
+                   }
+             printf("p%d",p[i].pid);
+              for(j=0;j<(p[i].bt/2);j++)
+                   {
+              printf(" ");
+                  }
+              printf("|");
+                  }
+              printf("\n");
+              for(i=0;i<n;i++)
+                    {
+              for(j=0;j<p[i].bt;j++)
+                    {
+             printf("_");
+                    }
+             printf("--");
+                   }
+             printf("\n");
+            for(i=0;i<n;i++)
+                  {
+            printf("%d",p[i].wt);
+            for(j=0;j<p[i].bt+2;j++)
+                  {
+           printf(" ");
+                  }
+                }
+           printf("%d\n",p[n-1].tt);
+           printf("\n total waiting time is %d",tw);
+           printf("\n total turn around time is %d",tat);
+           printf("\n average waiting time is %f",aw);
+           printf("\n average turn around time is %f",at);
+     } 
+          
