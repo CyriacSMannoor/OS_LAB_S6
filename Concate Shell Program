@@ -1,0 +1,5 @@
+echo enter ur name
+read namea
+echo enter ur name
+read nameb
+echo $namea $nameb
