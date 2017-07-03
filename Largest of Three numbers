@@ -1,0 +1,30 @@
+echo enter no1
+read a
+echo enter no2
+read b
+echo enter no3
+read c
+if [ $a -gt $b  -a  $a -gt $c ]
+then
+echo The greater value is
+echo $a
+elif [ $b -gt $a -a $b -gt $c ] 
+then
+echo The greater value is
+echo $b
+else
+echo The greater value is
+echo $c
+fi
+if [ $a -lt $b  -a  $a -lt $c ]
+then
+echo The smaller value is
+echo $a
+elif [ $b -lt $a -a $b -lt $c] 
+then
+echo The smaller value is
+echo $b
+else
+echo The smaller value is
+echo $c
+fi
